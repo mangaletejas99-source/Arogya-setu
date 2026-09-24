@@ -1,0 +1,31 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#EAF2F8"/>
+  <rect x="0" y="0" width="1200" height="800" fill="url(#paint0_linear_1_2)"/>
+  <circle cx="153" cy="123" r="64" fill="#F7C46C" opacity="0.4"/>
+  <circle cx="1043" cy="126" r="82" fill="#CFE0F5" opacity="0.8"/>
+  <path d="M413 280C413 221.918 461.918 173 520 173H680C738.082 173 787 221.918 787 280V639H413V280Z" fill="#D8E7F6"/>
+  <path d="M504 268C504 238.177 528.177 214 558 214H642C671.823 214 696 238.177 696 268V611H504V268Z" fill="#F7FAFC"/>
+  <rect x="519" y="288" width="162" height="122" rx="18" fill="#0B3B60"/>
+  <rect x="546" y="322" width="108" height="14" rx="7" fill="#F7C46C"/>
+  <rect x="546" y="350" width="82" height="12" rx="6" fill="#8DB9D9"/>
+  <rect x="571" y="452" width="58" height="116" rx="16" fill="#0B3B60"/>
+  <path d="M537 511H664L635 606H566L537 511Z" fill="#F7C46C"/>
+  <path d="M364 610C398.333 558.667 420 533 429 533C438 533 458.333 553.667 490 595L545 664H301L364 610Z" fill="#9AC3E3"/>
+  <path d="M670 610C704.333 558.667 726 533 735 533C744 533 764.333 553.667 796 595L851 664H607L670 610Z" fill="#9AC3E3"/>
+  <circle cx="694" cy="202" r="41" fill="#F7C46C"/>
+  <path d="M694 148V256" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M640 202H748" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M264 701H936" stroke="#B5CDE6" stroke-width="18" stroke-linecap="round"/>
+  <path d="M891 235L1001 345" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M1001 235L891 345" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M199 235L89 345" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M89 235L199 345" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
+  <text x="600" y="75" text-anchor="middle" fill="#0B3B60" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">AROGYA SETU</text>
+  <text x="600" y="720" text-anchor="middle" fill="#29567A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="600">Healthcare access • Prevention • Community care</text>
+  <defs>
+    <linearGradient id="paint0_linear_1_2" x1="600" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF6FB"/>
+      <stop offset="1" stop-color="#CCE1F2"/>
+    </linearGradient>
+  </defs>
+</svg>

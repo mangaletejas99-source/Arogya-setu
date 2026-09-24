@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-scale: 1rem;
+    --gov-blue: #0B3B60;
+  }
+
+  html {
+    font-size: var(--font-scale);
+    scroll-behavior: smooth;
+    color: #1E293B;
+    background-color: #F8FAFC;
+  }
+
+  /* High contrast mode for accessibility */
+  .high-contrast {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+  }
+
+  .high-contrast * {
+    border-color: #FFFFFF !important;
+  }
+
+  .high-contrast a,
+  .high-contrast button {
+    color: #FFFF00 !important;
+    text-decoration: underline !important;
+  }
+
+  .high-contrast .bg-white,
+  .high-contrast .bg-gov-gray-50,
+  .high-contrast .bg-gov-gray-100 {
+    background-color: #121212 !important;
+    color: #FFFFFF !important;
+  }
+
+  .high-contrast .text-gray-500,
+  .high-contrast .text-gray-600,
+  .high-contrast .text-gov-gray-600 {
+    color: #E2E8F0 !important;
+  }
+
+  /* Focus visible indicator compliant with Indian Government Guidelines */
+  *:focus-visible {
+    outline: 2.5px solid #D9531E !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Skip to main content utility */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 8px;
+    background: #0B3B60;
+    color: white;
+    padding: 8px 16px;
+    z-index: 9999;
+    transition: top 0.2s;
+    font-weight: 600;
+  }
+
+  .skip-link:focus {
+    top: 8px;
+  }
+}
+
+/* Print styles for prescription, referral, and medical timeline */
+@media print {
+  nav, footer, .no-print, header, .utility-bar {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
