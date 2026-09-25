@@ -6,7 +6,7 @@ interface ImageWithFallbackProps extends React.ImgHTMLAttributes<HTMLImageElemen
 
 export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   src,
-  fallbackSrc = '/assets/images/healthcare/ayushman-arogya-mandir-sehri.jpg',
+  fallbackSrc = '/assets/images/india-government-health/01-home-public-health.jpg',
   alt,
   loading,
   ...props

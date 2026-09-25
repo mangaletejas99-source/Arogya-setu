@@ -180,8 +180,8 @@ export const ServicesPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-4">
         <div className="overflow-hidden rounded-2xl border border-gov-gray-300 bg-white shadow-sm">
           <ImageWithFallback
-            src={healthcareImages.homeHero}
-            alt="Indian public healthcare workers providing patient care in a rural clinical setting"
+            src="/assets/images/india-government-health/24-ashaworker-campaign.jpg"
+            alt="Primary Health Centre facility in Kohlri, from the Ayushman Arogya Mandir photo gallery"
             className="h-64 w-full object-cover"
             loading="eager"
             fallbackSrc={healthcareImages.fallback}
