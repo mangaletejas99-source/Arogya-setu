@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-labelledby="title desc">
+  <title id="title">Arogya Setu logo</title>
+  <desc id="desc">Government-inspired healthcare emblem for Arogya Setu.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b3b66"/>
+      <stop offset="100%" stop-color="#0e527d"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="220" rx="26" fill="#f8fbff"/>
+  <g transform="translate(26 28)">
+    <circle cx="82" cy="82" r="72" fill="url(#bg)"/>
+    <path d="M82 28c-31 0-56 25-56 56v18c0 31 25 56 56 56s56-25 56-56V84c0-31-25-56-56-56zm-8 26h16v20h20v16h-20v20H74v-20H54v-16h20V54z" fill="#fff"/>
+    <path d="M56 92h52v12H56zm18-18h12v52H74z" fill="url(#accent)"/>
+    <path d="M82 152c13 0 24-11 24-24v-17h-48v17c0 13 11 24 24 24z" fill="#dbeafe" opacity="0.7"/>
+    <circle cx="82" cy="98" r="7" fill="#fbbf24"/>
+  </g>
+  <g transform="translate(200 60)">
+    <text x="0" y="50" font-family="Verdana, Arial, sans-serif" font-weight="800" font-size="42" fill="#103662" letter-spacing="2">AROGYA</text>
+    <text x="0" y="96" font-family="Verdana, Arial, sans-serif" font-weight="700" font-size="28" fill="#155a8b" letter-spacing="4">SETU</text>
+    <rect x="0" y="118" width="270" height="6" rx="3" fill="#f59e0b"/>
+    <text x="0" y="158" font-family="Verdana, Arial, sans-serif" font-weight="600" font-size="18" fill="#5c6b7a">Integrated Digital Public Health Platform</text>
+  </g>
+</svg>

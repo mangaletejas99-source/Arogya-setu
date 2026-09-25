@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Healthcare facility illustration</title>
+  <desc id="desc">A modern public healthcare facility and community care illustration.</desc>
+  <defs>
+    <linearGradient id="g1" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b3b66"/>
+      <stop offset="100%" stop-color="#1b6fa8"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#f9d783"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#edf7ff"/>
+  <circle cx="160" cy="160" r="150" fill="#dbeafe"/>
+  <circle cx="1040" cy="140" r="120" fill="#fef3c7"/>
+  <rect x="150" y="120" width="900" height="560" rx="32" fill="#ffffff" stroke="#d8e6f5" stroke-width="4"/>
+  <rect x="210" y="220" width="260" height="200" rx="18" fill="url(#g1)"/>
+  <rect x="355" y="180" width="200" height="260" rx="18" fill="#edf5ff"/>
+  <rect x="580" y="220" width="350" height="220" rx="18" fill="#eef6ff"/>
+  <path d="M440 280h42v120h-42zm-41-42h120v42H399zm0 116h120v42H399z" fill="#0b3b66"/>
+  <rect x="240" y="252" width="200" height="18" rx="9" fill="#d3ebff"/>
+  <rect x="240" y="292" width="160" height="18" rx="9" fill="#d3ebff"/>
+  <rect x="240" y="332" width="180" height="18" rx="9" fill="#d3ebff"/>
+  <path d="M620 270h120v80H620zm0 110h150v40H620zm168 0h120v40H788zm0-110h100v80H788z" fill="#cfe5ff"/>
+  <rect x="290" y="500" width="620" height="100" rx="20" fill="#f4f9ff"/>
+  <path d="M322 560h250v22H322zm298 0h170v22H620z" fill="#cfe3ff"/>
+  <rect x="910" y="520" width="90" height="90" rx="16" fill="url(#g2)"/>
+  <path d="M955 540v50m-25-25h50" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+  <text x="600" y="700" text-anchor="middle" font-family="Verdana, Arial, sans-serif" font-size="36" font-weight="700" fill="#103662">Primary Care & Hospital Access</text>
+</svg>

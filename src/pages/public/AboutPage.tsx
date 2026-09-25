@@ -1,8 +1,9 @@
 import React from 'react';
 import { Shield, Building2, Share2, Award, Lock, FileCheck, CheckCircle2 } from 'lucide-react';
 import { ImageWithFallback } from '../../components/common/ImageWithFallback';
+import { healthcareImages } from '../../data/healthcareImages';
 
-const communityCareImage = 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=80';
+const communityCareImage = healthcareImages.publicHealth;
 
 export const AboutPage: React.FC = () => {
   return (

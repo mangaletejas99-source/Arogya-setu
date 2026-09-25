@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ImageWithFallback } from '../../components/common/ImageWithFallback';
 import { MOCK_FACILITIES, HealthFacility } from '../../data/mockFacilities';
+import { healthcareImages } from '../../data/healthcareImages';
 import { Building2, Search, MapPin, Phone, Clock, Bed, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export const FacilitiesPage: React.FC = () => {
@@ -40,10 +41,10 @@ export const FacilitiesPage: React.FC = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {[
-          { title: 'PHC', image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Rural Hospital', image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895977?auto=format&fit=crop&w=900&q=80' },
-          { title: 'District Hospital', image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Mobile Medical Unit', image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80' }
+          { title: 'PHC', image: healthcareImages.phc },
+          { title: 'Rural Hospital', image: healthcareImages.ruralHospital },
+          { title: 'District Hospital', image: healthcareImages.districtHospital },
+          { title: 'Mobile Medical Unit', image: healthcareImages.mobileMedicalUnit }
         ].map((facility) => (
           <div key={facility.title} className="overflow-hidden rounded-xl border border-gov-gray-200 bg-white shadow-sm">
             <ImageWithFallback src={facility.image} alt={facility.title} className="h-40 w-full object-cover" />

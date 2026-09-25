@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { ImageWithFallback } from '../../components/common/ImageWithFallback';
 import { useAccessibility } from '../../context/AccessibilityContext';
+import { healthcareImages } from '../../data/healthcareImages';
 
 export const ServicesPage: React.FC = () => {
   const { t } = useAccessibility();
@@ -179,9 +180,11 @@ export const ServicesPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-4">
         <div className="overflow-hidden rounded-2xl border border-gov-gray-300 bg-white shadow-sm">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1538108149393-fbbd81895977?auto=format&fit=crop&w=1200&q=80"
-            alt="Healthcare workers and patient using a telehealth consultation in a rural clinic"
+            src={healthcareImages.homeHero}
+            alt="Indian public healthcare workers providing patient care in a rural clinical setting"
             className="h-64 w-full object-cover"
+            loading="eager"
+            fallbackSrc={healthcareImages.fallback}
           />
         </div>
         <div className="rounded-2xl border border-gov-gray-200 bg-slate-50 p-5 shadow-sm">
@@ -236,10 +239,10 @@ export const ServicesPage: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {[
-          { title: 'Teleconsultation', image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Primary Health Centre', image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Rural Hospital', image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895977?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Emergency Assistance', image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=80' }
+          { title: 'Teleconsultation', image: healthcareImages.teleconsultation },
+          { title: 'Primary Health Centre', image: healthcareImages.phc },
+          { title: 'Rural Hospital', image: healthcareImages.ruralHospital },
+          { title: 'Emergency Assistance', image: healthcareImages.emergencyCare }
         ].map((item) => (
           <div key={item.title} className="overflow-hidden rounded-xl border border-gov-gray-200 bg-white shadow-sm">
             <ImageWithFallback src={item.image} alt={item.title} className="h-40 w-full object-cover" />

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Telehealth consultation illustration</title>
+  <desc id="desc">Healthcare workers and patients in a teleconsultation workflow.</desc>
+  <defs>
+    <linearGradient id="gradA" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b3b66"/>
+      <stop offset="100%" stop-color="#1a6ea8"/>
+    </linearGradient>
+    <linearGradient id="gradB" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#f9d783"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#edf7ff"/>
+  <rect x="100" y="120" width="1000" height="560" rx="30" fill="#f4f9ff" stroke="#d9e7fb" stroke-width="4"/>
+  <rect x="170" y="180" width="390" height="260" rx="26" fill="url(#gradA)"/>
+  <circle cx="300" cy="260" r="78" fill="#edf7ff"/>
+  <path d="M255 249h90v18h-90zm45-42h18v90h-18z" fill="#0b3b66"/>
+  <rect x="246" y="350" width="110" height="18" rx="9" fill="#cfe3ff"/>
+  <rect x="246" y="382" width="178" height="18" rx="9" fill="#bfd9ff"/>
+  <rect x="630" y="180" width="360" height="260" rx="26" fill="#ffffff" stroke="#dbe9f8"/>
+  <rect x="675" y="230" width="270" height="168" rx="18" fill="#eaf4ff"/>
+  <circle cx="770" cy="290" r="52" fill="#dfeeff"/>
+  <rect x="708" y="350" width="134" height="18" rx="9" fill="#bfd6f4"/>
+  <rect x="860" y="350" width="56" height="18" rx="9" fill="#f7d65d"/>
+  <path d="M630 558h370" stroke="#a9bfd9" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="250" cy="560" r="62" fill="#dfeeff"/>
+  <circle cx="640" cy="560" r="62" fill="#dfeeff"/>
+  <circle cx="980" cy="560" r="62" fill="#dfeeff"/>
+  <path d="M216 560h68v38h-68zm603 0h68v38h-68zm339 0h72v38h-72z" fill="url(#gradB)" opacity="0.8"/>
+  <text x="600" y="700" text-anchor="middle" font-family="Verdana, Arial, sans-serif" font-size="32" font-weight="700" fill="#103662">Digital Health Service Access</text>
+</svg>

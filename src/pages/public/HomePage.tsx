@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ImageWithFallback } from '../../components/common/ImageWithFallback';
 import { useAccessibility } from '../../context/AccessibilityContext';
+import { healthcareImages } from '../../data/healthcareImages';
 import {
   Search,
   Building2,
@@ -198,9 +199,11 @@ export const HomePage: React.FC = () => {
             <div className="space-y-4">
               <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl backdrop-blur-sm">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80"
+                  src={healthcareImages.homeHero}
                   alt="Doctor consulting a patient during a rural primary healthcare outreach session"
                   className="h-64 w-full object-cover sm:h-72"
+                  loading="eager"
+                  fallbackSrc={healthcareImages.fallback}
                 />
               </div>
 

@@ -21,9 +21,25 @@ import {
   UserRoundSearch,
   MapPin,
   ShieldAlert,
-  Activity
+  Activity,
+  Droplets,
+  PhoneCall,
+  Filter,
+  ShieldCheck,
+  Siren,
 } from 'lucide-react';
 import { StatusBadge } from '../../components/common/StatusBadge';
+import { Modal } from '../../components/common/Modal';
+import {
+  BLOOD_GROUP_OPTIONS,
+  URGENCY_OPTIONS,
+  createBloodRequest,
+  getBloodRequestHistory,
+  getNearbyBloodBanks,
+  type BloodBank,
+  type BloodGroup,
+  type UrgencyLevel,
+} from '../../services/bloodBankService';
 
 interface AIHealthSummaryEntry {
   patientId: string;
@@ -52,6 +68,28 @@ export const DoctorDashboard: React.FC = () => {
   const [consultNotes, setConsultNotes] = useState('Patient reviewed for monthly diabetic monitoring. Advised adherence to dietary low-sodium protocols and daily brisk walking.');
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
+  const [bloodForm, setBloodForm] = useState({
+    patientName: 'Aarav Patil',
+    patientId: 'PAT-1001',
+    bloodGroup: 'O+' as BloodGroup,
+    requiredUnits: 2,
+    urgency: 'Critical — Immediate' as UrgencyLevel,
+    hospital: 'Nashik District Hospital',
+    location: 'Nashik',
+  });
+  const [bloodSort, setBloodSort] = useState<'nearest' | 'most-units' | 'recently-updated'>('nearest');
+  const [bloodFilters, setBloodFilters] = useState({
+    openNow: false,
+    emergencyOnly: false,
+    maxDistanceKm: 10,
+  });
+  const [bloodResults, setBloodResults] = useState<BloodBank[]>([]);
+  const [bloodMessage, setBloodMessage] = useState('Demo availability — connect to an authorized blood-bank API for real-time availability.');
+  const [requestModalBank, setRequestModalBank] = useState<BloodBank | null>(null);
+  const [bloodRequestHistory, setBloodRequestHistory] = useState(() => getBloodRequestHistory());
+  const [requestSuccess, setRequestSuccess] = useState<string | null>(null);
+  const [locationNotice, setLocationNotice] = useState('Using Maharashtra / Nashik demo blood-bank data for prototype mode.');
+
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem('arogya_setu_ai_health_summary_v1');
@@ -67,6 +105,15 @@ export const DoctorDashboard: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    setBloodForm((current) => ({
+      ...current,
+      patientName: activePatient.name,
+      patientId: activePatient.id,
+      hospital: current.hospital || 'Nashik District Hospital',
+    }));
+  }, [activePatient]);
+
   const handlePatientLookup = (e: React.FormEvent) => {
     e.preventDefault();
     const match = findPatientById(patientSearch);
@@ -77,6 +124,11 @@ export const DoctorDashboard: React.FC = () => {
     }
     setLookupPatient(match);
     setLookupMessage('');
+    setBloodForm((current) => ({
+      ...current,
+      patientName: match.name,
+      patientId: match.patientId,
+    }));
   };
 
   const handleSaveClinicalEncounter = (e: React.FormEvent) => {
@@ -85,9 +137,71 @@ export const DoctorDashboard: React.FC = () => {
     setTimeout(() => setActionSuccess(null), 4000);
   };
 
+  const handleUseCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      setLocationNotice('Geolocation is unavailable in this browser. Manual district selection is being used.');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        setBloodForm((current) => ({ ...current, location: 'Nashik' }));
+        setLocationNotice('Current device location detected. Showing nearest Nashik demo blood-bank availability for prototype mode.');
+      },
+      () => {
+        setBloodForm((current) => ({ ...current, location: 'Nashik' }));
+        setLocationNotice('Location permission denied. Manual district selection is being used for demo blood-bank availability.');
+      },
+      { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 }
+    );
+  };
+
+  const handleBloodLookup = (e: React.FormEvent) => {
+    e.preventDefault();
+    const results = getNearbyBloodBanks({
+      bloodGroup: bloodForm.bloodGroup,
+      location: bloodForm.location,
+      requiredUnits: bloodForm.requiredUnits,
+      openNow: bloodFilters.openNow,
+      emergencyOnly: bloodFilters.emergencyOnly,
+      distanceLimitKm: bloodFilters.maxDistanceKm,
+      sortBy: bloodSort,
+    });
+
+    setBloodResults(results);
+    if (results.length === 0) {
+      setBloodMessage('No compatible nearby blood banks match the selected filters. Try a broader distance or alternate blood group.');
+      return;
+    }
+
+    setBloodMessage('Demo availability — connect to an authorized blood-bank API for real-time availability.');
+  };
+
+  const handleRequestBlood = (bank: BloodBank) => {
+    setRequestModalBank(bank);
+  };
+
+  const handleConfirmRequest = () => {
+    if (!requestModalBank) return;
+
+    const request = createBloodRequest({
+      patientId: bloodForm.patientId,
+      patientName: bloodForm.patientName,
+      bloodGroup: bloodForm.bloodGroup,
+      unitsRequired: bloodForm.requiredUnits,
+      hospital: bloodForm.hospital,
+      bloodBank: requestModalBank.name,
+      urgency: bloodForm.urgency,
+    });
+
+    setBloodRequestHistory(getBloodRequestHistory());
+    setRequestSuccess(`Blood request created successfully. Request ID: ${request.id} • Request Status: Pending Confirmation`);
+    setRequestModalBank(null);
+    setTimeout(() => setRequestSuccess(null), 5000);
+  };
+
   return (
     <div className="space-y-6">
-      {/* Clinician Welcome Header */}
       <div className="bg-white border border-gov-gray-300 rounded-lg p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
@@ -124,7 +238,6 @@ export const DoctorDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Doctor Overview Stat Metric Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 text-xs text-center">
         <div className="bg-white border border-gov-gray-200 rounded p-3 shadow-xs">
           <div className="text-[10px] text-slate-500 uppercase font-semibold">Today's Total</div>
@@ -173,6 +286,13 @@ export const DoctorDashboard: React.FC = () => {
         <div className="bg-emerald-50 border border-emerald-300 text-emerald-900 p-3 rounded text-xs font-bold flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-emerald-600" />
           <span>{actionSuccess}</span>
+        </div>
+      )}
+
+      {requestSuccess && (
+        <div className="bg-emerald-50 border border-emerald-300 text-emerald-900 p-3 rounded text-xs font-bold flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+          <span>{requestSuccess}</span>
         </div>
       )}
 
@@ -232,40 +352,315 @@ export const DoctorDashboard: React.FC = () => {
       </div>
 
       <div className="bg-white border border-gov-gray-300 rounded-lg p-5 shadow-xs text-xs">
-        <div className="flex items-center justify-between border-b border-gov-gray-200 pb-2 mb-3">
+        <div className="mb-4 flex items-center justify-between gap-3 border-b border-gov-gray-200 pb-3">
           <div className="flex items-center gap-2 text-gov-navy font-bold uppercase tracking-wider">
-            <FileText className="w-4 h-4 text-gov-saffron" />
-            AI Health Assistant Summary
+            <Droplets className="w-4 h-4 text-rose-600" />
+            Emergency Blood Availability
           </div>
-          <span className="bg-blue-100 text-gov-navy text-[10px] font-bold px-2 py-1 rounded">{assistantSummaries.length} saved</span>
+          <span className="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-1 rounded">Prototype workflow</span>
         </div>
 
-        {assistantSummaries.length === 0 ? (
-          <div className="text-slate-500 italic">No AI health summaries yet. Ask the citizen to generate one from the assistant.</div>
-        ) : (
-          <div className="space-y-3">
-            {assistantSummaries.slice(0, 3).map((summary, index) => (
-              <div key={`${summary.patientId}-${index}`} className="rounded border border-gov-gray-200 bg-slate-50 p-3 space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="font-bold text-gov-navy">Patient complaint: {summary.complaint}</div>
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${summary.riskLevel === 'HIGH' ? 'bg-rose-100 text-rose-800' : summary.riskLevel === 'MEDIUM' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}`}>
-                    {summary.riskLevel}
-                  </span>
-                </div>
-                <div className="text-slate-600">Symptoms: {summary.symptoms}</div>
-                <div className="text-slate-600">Duration: {summary.duration}</div>
-                <div className="text-slate-600">Generated summary: {summary.summary}</div>
-                <div className="text-slate-500 text-[10px]">Date: {new Date(summary.date).toLocaleString()}</div>
-              </div>
-            ))}
+        <p className="text-sm text-slate-600 max-w-3xl">
+          Find compatible blood units available near the patient and initiate a limited demo blood request workflow for hospital staff.
+        </p>
+
+        {bloodForm.urgency === 'Critical — Immediate' && (
+          <div className="mt-4 rounded-lg border border-rose-200 bg-rose-50 p-3 text-rose-800">
+            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em]">
+              <Siren className="w-4 h-4" />
+              CRITICAL BLOOD REQUIREMENT
+            </div>
+            <div className="mt-1 text-sm font-medium">Immediate blood availability search initiated.</div>
           </div>
         )}
+
+        <form onSubmit={handleBloodLookup} className="mt-5 space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+            <div>
+              <label className="block font-semibold text-slate-700 mb-1">Patient Name</label>
+              <input
+                type="text"
+                value={bloodForm.patientName}
+                onChange={(e) => setBloodForm((current) => ({ ...current, patientName: e.target.value }))}
+                className="w-full p-2 border border-gov-gray-300 rounded focus:ring-1 focus:ring-gov-navy focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold text-slate-700 mb-1">Patient ID</label>
+              <input
+                type="text"
+                value={bloodForm.patientId}
+                onChange={(e) => setBloodForm((current) => ({ ...current, patientId: e.target.value }))}
+                className="w-full p-2 border border-gov-gray-300 rounded focus:ring-1 focus:ring-gov-navy focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold text-slate-700 mb-1">Blood Group</label>
+              <select
+                value={bloodForm.bloodGroup}
+                onChange={(e) => setBloodForm((current) => ({ ...current, bloodGroup: e.target.value as BloodGroup }))}
+                className="w-full p-2 border border-gov-gray-300 rounded bg-white focus:ring-1 focus:ring-gov-navy focus:outline-none"
+              >
+                {BLOOD_GROUP_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block font-semibold text-slate-700 mb-1">Required Units</label>
+              <input
+                type="number"
+                min={1}
+                max={10}
+                value={bloodForm.requiredUnits}
+                onChange={(e) => setBloodForm((current) => ({ ...current, requiredUnits: Number(e.target.value) || 1 }))}
+                className="w-full p-2 border border-gov-gray-300 rounded focus:ring-1 focus:ring-gov-navy focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+            <div>
+              <label className="block font-semibold text-slate-700 mb-1">Urgency</label>
+              <select
+                value={bloodForm.urgency}
+                onChange={(e) => setBloodForm((current) => ({ ...current, urgency: e.target.value as UrgencyLevel }))}
+                className="w-full p-2 border border-gov-gray-300 rounded bg-white focus:ring-1 focus:ring-gov-navy focus:outline-none"
+              >
+                {URGENCY_OPTIONS.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block font-semibold text-slate-700 mb-1">Hospital / Facility</label>
+              <input
+                type="text"
+                value={bloodForm.hospital}
+                onChange={(e) => setBloodForm((current) => ({ ...current, hospital: e.target.value }))}
+                className="w-full p-2 border border-gov-gray-300 rounded focus:ring-1 focus:ring-gov-navy focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold text-slate-700 mb-1">Patient Location</label>
+              <select
+                value={bloodForm.location}
+                onChange={(e) => setBloodForm((current) => ({ ...current, location: e.target.value }))}
+                className="w-full p-2 border border-gov-gray-300 rounded bg-white focus:ring-1 focus:ring-gov-navy focus:outline-none"
+              >
+                <option value="Nashik">Nashik</option>
+                <option value="Dhule">Dhule</option>
+                <option value="Jalgaon">Jalgaon</option>
+                <option value="Pune">Pune</option>
+              </select>
+            </div>
+            <div className="flex items-end">
+              <button
+                type="button"
+                onClick={handleUseCurrentLocation}
+                className="w-full border border-gov-gray-300 bg-slate-50 hover:bg-slate-100 text-gov-navy rounded px-3 py-2 font-bold text-xs"
+              >
+                Use My Location
+              </button>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-[11px] text-sky-800">
+            {locationNotice}
+          </div>
+
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2 text-[11px]">
+              <span className="font-semibold text-slate-600 flex items-center gap-1"><Filter className="w-3.5 h-3.5" /> Filters:</span>
+              <label className="inline-flex items-center gap-1 rounded border border-slate-200 bg-slate-50 px-2 py-1">
+                <input type="checkbox" checked={bloodFilters.openNow} onChange={(e) => setBloodFilters((current) => ({ ...current, openNow: e.target.checked }))} /> Open Now
+              </label>
+              <label className="inline-flex items-center gap-1 rounded border border-slate-200 bg-slate-50 px-2 py-1">
+                <input type="checkbox" checked={bloodFilters.emergencyOnly} onChange={(e) => setBloodFilters((current) => ({ ...current, emergencyOnly: e.target.checked }))} /> Emergency Support
+              </label>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <label className="text-[11px] font-semibold text-slate-600">Distance</label>
+              <select
+                value={bloodFilters.maxDistanceKm}
+                onChange={(e) => setBloodFilters((current) => ({ ...current, maxDistanceKm: Number(e.target.value) }))}
+                className="border border-gov-gray-300 rounded p-1.5 bg-white"
+              >
+                <option value={5}>Up to 5 km</option>
+                <option value={10}>Up to 10 km</option>
+                <option value={20}>Up to 20 km</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-600">
+              <span>Sort:</span>
+              <select
+                value={bloodSort}
+                onChange={(e) => setBloodSort(e.target.value as 'nearest' | 'most-units' | 'recently-updated')}
+                className="border border-gov-gray-300 rounded p-1.5 bg-white"
+              >
+                <option value="nearest">Nearest</option>
+                <option value="most-units">Most Units Available</option>
+                <option value="recently-updated">Recently Updated</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              className="bg-gov-navy text-white px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-gov-navyLight transition-colors flex items-center justify-center gap-2"
+            >
+              <Droplets className="w-4 h-4 text-rose-200" />
+              Find Nearby Blood
+            </button>
+          </div>
+        </form>
+
+        <div className="mt-3 rounded border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] text-amber-900">
+          Blood compatibility and transfusion decisions must always be verified by qualified medical professionals and the treating blood bank.
+        </div>
+
+        {bloodMessage && (
+          <div className="mt-4 rounded border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] text-slate-700">
+            {bloodMessage}
+          </div>
+        )}
+
+        {bloodResults.length > 0 && (
+          <div className="mt-5 space-y-4">
+            <div className="flex items-center justify-between gap-2 border-b border-gov-gray-200 pb-2">
+              <div className="font-bold text-gov-navy uppercase tracking-wider text-[11px]">Nearby Blood Banks</div>
+              <div className="text-[10px] text-slate-500">Compatible group: {bloodForm.bloodGroup}</div>
+            </div>
+
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+              {bloodResults.map((bank) => (
+                <div key={bank.id} className="rounded-xl border border-gov-gray-200 bg-white p-4 shadow-sm">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="text-base font-bold text-gov-navy">{bank.name}</div>
+                      <div className="mt-1 flex items-center gap-1 text-[11px] text-slate-600">
+                        <MapPin className="w-3.5 h-3.5 text-gov-saffron" />
+                        <span>{bank.address}</span>
+                      </div>
+                    </div>
+                    <div className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${bank.open ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700'}`}>
+                      {bank.open ? 'Open' : 'Closed'}
+                    </div>
+                  </div>
+
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-slate-700">
+                    <div className="rounded bg-slate-50 p-2 border border-slate-200">
+                      <div className="text-slate-500">Distance</div>
+                      <div className="font-bold text-gov-navy">{bank.distanceKm.toFixed(1)} km</div>
+                    </div>
+                    <div className="rounded bg-slate-50 p-2 border border-slate-200">
+                      <div className="text-slate-500">Blood Group</div>
+                      <div className="font-bold text-gov-navy">{bank.bloodGroup}</div>
+                    </div>
+                    <div className="rounded bg-slate-50 p-2 border border-slate-200">
+                      <div className="text-slate-500">Available</div>
+                      <div className="font-bold text-gov-navy">{bank.availableUnits} Units</div>
+                    </div>
+                    <div className="rounded bg-slate-50 p-2 border border-slate-200">
+                      <div className="text-slate-500">Updated</div>
+                      <div className="font-bold text-gov-navy">{bank.lastUpdatedMinutesAgo} mins ago</div>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 flex items-center justify-between text-[11px] text-slate-600">
+                    <div className="flex items-center gap-1"><PhoneCall className="w-3.5 h-3.5 text-gov-green" />{bank.phone}</div>
+                    <div className={`rounded-full px-2 py-0.5 font-bold ${bank.emergencySupport ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-700'}`}>
+                      {bank.emergencySupport ? 'Emergency Support' : 'Routine Support'}
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <a
+                      href={`tel:${bank.phone}`}
+                      className="flex-1 min-w-[120px] bg-gov-navy text-white px-3 py-2 rounded text-[10px] font-bold uppercase tracking-[0.12em] text-center"
+                    >
+                      Call Now
+                    </a>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(bank.address)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 min-w-[120px] border border-gov-gray-300 bg-white text-gov-navy px-3 py-2 rounded text-[10px] font-bold uppercase tracking-[0.12em] text-center"
+                    >
+                      Get Directions
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => handleRequestBlood(bank)}
+                      className="flex-1 min-w-[120px] bg-gov-saffron text-white px-3 py-2 rounded text-[10px] font-bold uppercase tracking-[0.12em]"
+                    >
+                      Request Blood
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-5 rounded border border-slate-200 bg-slate-50 p-3 text-[11px] text-slate-600">
+          <div className="flex items-center gap-2 font-bold uppercase tracking-wider text-gov-navy">
+            <ShieldCheck className="w-4 h-4 text-gov-saffron" />
+            Blood Compatibility Summary
+          </div>
+          <div className="mt-2">
+            {bloodForm.bloodGroup} can receive compatible units from: {getNearbyBloodBanks({ bloodGroup: bloodForm.bloodGroup, distanceLimitKm: 20, location: 'Nashik', requiredUnits: 1, sortBy: 'nearest' }).slice(0, 3).map((bank) => bank.bloodGroup).join(', ') || bloodForm.bloodGroup}
+          </div>
+        </div>
       </div>
 
-      {/* Main Clinical Workstation Split: Active Patient in Room + Clinical Action Pad */}
+      <div className="bg-white border border-gov-gray-300 rounded-lg p-5 shadow-xs text-xs">
+        <div className="flex items-center justify-between gap-2 border-b border-gov-gray-200 pb-2 mb-3">
+          <div className="flex items-center gap-2 text-gov-navy font-bold uppercase tracking-wider">
+            <FileText className="w-4 h-4 text-gov-saffron" />
+            Recent Blood Requests
+          </div>
+          <span className="bg-blue-100 text-gov-navy text-[10px] font-bold px-2 py-1 rounded">{bloodRequestHistory.length} requests</span>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-left text-[11px]">
+            <thead>
+              <tr className="border-b border-slate-200 text-slate-600">
+                <th className="pb-2 pr-3 font-bold uppercase">Request ID</th>
+                <th className="pb-2 pr-3 font-bold uppercase">Patient</th>
+                <th className="pb-2 pr-3 font-bold uppercase">Blood Group</th>
+                <th className="pb-2 pr-3 font-bold uppercase">Units</th>
+                <th className="pb-2 pr-3 font-bold uppercase">Blood Bank</th>
+                <th className="pb-2 pr-3 font-bold uppercase">Requested At</th>
+                <th className="pb-2 pr-3 font-bold uppercase">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bloodRequestHistory.map((request) => (
+                <tr key={request.id} className="border-b border-slate-100 align-top">
+                  <td className="py-2 pr-3 font-semibold text-gov-navy">{request.id}</td>
+                  <td className="py-2 pr-3">{request.patientName}</td>
+                  <td className="py-2 pr-3">{request.bloodGroup}</td>
+                  <td className="py-2 pr-3">{request.unitsRequired}</td>
+                  <td className="py-2 pr-3">{request.bloodBank}</td>
+                  <td className="py-2 pr-3">{new Date(request.requestedAt).toLocaleString()}</td>
+                  <td className="py-2 pr-3">
+                    <span className={`inline-flex rounded-full px-2 py-0.5 font-bold ${request.status === 'Pending' ? 'bg-amber-100 text-amber-800' : request.status === 'Confirmed' ? 'bg-emerald-100 text-emerald-800' : request.status === 'Fulfilled' ? 'bg-blue-100 text-blue-800' : 'bg-rose-100 text-rose-800'}`}>
+                      {request.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        {/* Left: Active Patient EHR & Vitals Summary (5 cols) */}
         <div className="lg:col-span-5 bg-white border border-gov-gray-300 rounded-lg p-5 shadow-xs space-y-4 text-xs">
           <div className="flex items-center justify-between border-b border-gov-gray-200 pb-2">
             <div className="flex items-center gap-2">
@@ -285,7 +680,6 @@ export const DoctorDashboard: React.FC = () => {
             <div className="text-slate-500 font-mono text-[11px]">ABHA: {activePatient.abhaId}</div>
           </div>
 
-          {/* Vitals summary */}
           <div className="space-y-1.5">
             <div className="font-bold text-slate-700 text-[11px] uppercase">Recorded Vitals Today:</div>
             <div className="grid grid-cols-2 gap-2 text-[11px]">
@@ -304,7 +698,6 @@ export const DoctorDashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* Allergies Alert */}
           <div className="bg-rose-50 border border-rose-200 p-2.5 rounded">
             <div className="font-bold text-gov-emergency text-[11px] uppercase">Drug Allergies:</div>
             <div className="text-rose-900 font-semibold mt-0.5">
@@ -320,7 +713,6 @@ export const DoctorDashboard: React.FC = () => {
           </Link>
         </div>
 
-        {/* Right: Clinical Action Workspace (Prescribe, Diagnose, Order Tests, Refer) (7 cols) */}
         <div className="lg:col-span-7 bg-white border border-gov-gray-300 rounded-lg p-5 shadow-xs text-xs space-y-4">
           <h2 className="text-sm font-bold text-gov-navy border-b border-gov-gray-200 pb-2 uppercase tracking-wider">
             Clinical Consultation & Prescription Pad
@@ -401,8 +793,52 @@ export const DoctorDashboard: React.FC = () => {
             </div>
           </form>
         </div>
-
       </div>
+
+      {requestModalBank && (
+        <Modal
+          isOpen={true}
+          onClose={() => setRequestModalBank(null)}
+          title="Confirm Blood Request"
+          subtitle="Prototype workflow — this does not send a real live blood-bank request"
+          maxWidth="lg"
+        >
+          <div className="space-y-4 text-xs text-slate-700">
+            <div className="rounded border border-slate-200 bg-slate-50 p-3 space-y-2">
+              <div className="font-bold text-gov-navy uppercase tracking-wider">Request Summary</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div><span className="font-semibold">Patient ID:</span> {bloodForm.patientId}</div>
+                <div><span className="font-semibold">Blood Group:</span> {bloodForm.bloodGroup}</div>
+                <div><span className="font-semibold">Units Required:</span> {bloodForm.requiredUnits}</div>
+                <div><span className="font-semibold">Hospital:</span> {bloodForm.hospital}</div>
+                <div><span className="font-semibold">Blood Bank:</span> {requestModalBank.name}</div>
+                <div><span className="font-semibold">Urgency:</span> {bloodForm.urgency}</div>
+              </div>
+            </div>
+
+            <div className="rounded border border-amber-200 bg-amber-50 p-3 text-amber-900">
+              Blood compatibility and transfusion decisions must always be verified by qualified medical professionals and the treating blood bank.
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-end gap-2 pt-2 border-t border-slate-200">
+              <button
+                type="button"
+                onClick={() => setRequestModalBank(null)}
+                className="border border-gov-gray-300 text-gov-navy px-4 py-2 rounded font-bold"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmRequest}
+                className="bg-gov-navy text-white px-4 py-2 rounded font-bold hover:bg-gov-navyLight"
+              >
+                Confirm Request
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

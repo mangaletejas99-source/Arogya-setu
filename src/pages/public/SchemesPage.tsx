@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ImageWithFallback } from '../../components/common/ImageWithFallback';
 import { MOCK_SCHEMES, HealthScheme } from '../../data/mockSchemes';
+import { healthcareImages } from '../../data/healthcareImages';
 import { Award, Search, Filter, CheckCircle2, FileText, ExternalLink, ShieldAlert, ArrowRight } from 'lucide-react';
 import { Modal } from '../../components/common/Modal';
 
@@ -41,9 +42,11 @@ export const SchemesPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-4">
         <div className="overflow-hidden rounded-2xl border border-gov-gray-300 bg-white shadow-sm">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
+            src={healthcareImages.healthSchemes}
             alt="Public health workers guiding beneficiaries at a government health outreach camp"
             className="h-64 w-full object-cover"
+            loading="eager"
+            fallbackSrc={healthcareImages.fallback}
           />
         </div>
         <div className="rounded-2xl border border-gov-gray-200 bg-slate-50 p-5 shadow-sm">
@@ -57,11 +60,11 @@ export const SchemesPage: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
         {[
-          { title: 'Maternal & Child Care', image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Rural Care Programs', image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Preventive Health', image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895977?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Community Awareness', image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=80' },
-          { title: 'Health Schemes', image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=900&q=80' }
+          { title: 'Maternal & Child Care', image: healthcareImages.maternalHealth },
+          { title: 'Rural Care Programs', image: healthcareImages.ruralCare },
+          { title: 'Preventive Health', image: healthcareImages.preventiveHealth },
+          { title: 'Community Awareness', image: healthcareImages.communityAwareness },
+          { title: 'Health Schemes', image: healthcareImages.healthSchemes }
         ].map((item) => (
           <div key={item.title} className="overflow-hidden rounded-xl border border-gov-gray-200 bg-white shadow-sm">
             <ImageWithFallback src={item.image} alt={item.title} className="h-32 w-full object-cover" />

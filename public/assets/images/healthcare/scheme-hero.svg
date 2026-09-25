@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Government health schemes illustration</title>
+  <desc id="desc">Illustration of public health schemes, benefits and outreach support.</desc>
+  <defs>
+    <linearGradient id="s1" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b3b66"/>
+      <stop offset="100%" stop-color="#1f7ab6"/>
+    </linearGradient>
+    <linearGradient id="s2" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#d1fae5"/>
+      <stop offset="100%" stop-color="#bbf7d0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#edf7ff"/>
+  <circle cx="180" cy="150" r="120" fill="#dbeafe"/>
+  <circle cx="1010" cy="160" r="120" fill="#dcfce7"/>
+  <rect x="120" y="120" width="960" height="560" rx="32" fill="#ffffff" stroke="#d7e6f4" stroke-width="4"/>
+  <rect x="180" y="190" width="375" height="320" rx="26" fill="url(#s1)"/>
+  <circle cx="310" cy="280" r="72" fill="#edf6ff"/>
+  <path d="M274 278h72v18h-72zm35-35h18v72h-18z" fill="#0b3b66"/>
+  <rect x="250" y="370" width="120" height="18" rx="9" fill="#d0e9ff"/>
+  <rect x="250" y="406" width="180" height="18" rx="9" fill="#c7e0ff"/>
+  <rect x="585" y="190" width="390" height="120" rx="22" fill="#eff8ff" stroke="#d7e7f8"/>
+  <rect x="585" y="335" width="390" height="120" rx="22" fill="#eff8ff" stroke="#d7e7f8"/>
+  <rect x="585" y="480" width="390" height="80" rx="18" fill="url(#s2)"/>
+  <path d="M620 252h96v24h-96zm0 0v-52h96v52m-96 0h96" stroke="#1d4d7d" stroke-width="8" fill="none"/>
+  <path d="M620 382h116v28H620zm0 42h150v28H620zm0 0h220" stroke="#1d4d7d" stroke-width="8" fill="none"/>
+  <path d="M620 520h90v30h-90zm120 0h140v30H740z" stroke="#1a6a52" stroke-width="8" fill="none"/>
+  <text x="600" y="700" text-anchor="middle" font-family="Verdana, Arial, sans-serif" font-size="34" font-weight="700" fill="#103662">Public Health Benefits & Welfare Coverage</text>
+</svg>

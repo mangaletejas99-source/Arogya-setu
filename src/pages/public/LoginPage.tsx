@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth, UserRole, MOCK_USERS, DEMO_CREDENTIALS } from '../../context/AuthContext';
 import { Shield, KeyRound, User, ArrowRight, CheckCircle2, Stethoscope, Building2, BriefcaseBusiness, AlertTriangle } from 'lucide-react';
+import { healthcareImages } from '../../data/healthcareImages';
 
 const roleConfig: Record<UserRole, { title: string; subtitle: string; button: string; icon: any; description: string; idLabel: string }> = {
   citizen: {
@@ -95,9 +96,17 @@ export const LoginPage: React.FC = () => {
         <div className="bg-gradient-to-br from-gov-navy via-[#0c3f6b] to-[#113d5f] text-white rounded-2xl overflow-hidden shadow-xl border border-slate-700/60">
           <div className="p-6 md:p-8 space-y-6">
             <div className="flex items-center justify-between gap-3">
-              <div>
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300">Prototype / Demo</div>
-                <div className="text-3xl font-black tracking-tight mt-1">AROGYA SETU</div>
+              <div className="flex items-center gap-3">
+                <img
+                  src={healthcareImages.logo}
+                  alt="Arogya Setu logo"
+                  className="h-14 w-auto rounded-lg bg-white/5 p-1.5 shadow-sm"
+                  loading="eager"
+                />
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300">Prototype / Demo</div>
+                  <div className="text-3xl font-black tracking-tight mt-1">AROGYA SETU</div>
+                </div>
               </div>
               <div className="rounded-full border border-amber-300/40 bg-white/5 px-3 py-1 text-[10px] font-bold uppercase text-amber-200">
                 Secure access portal
@@ -106,9 +115,10 @@ export const LoginPage: React.FC = () => {
 
             <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-inner">
               <img
-                src="/images/healthcare/placeholder-healthcare.svg"
-                alt="Healthcare workers supporting patient care"
+                src={healthcareImages.doctorPatient}
+                alt="Healthcare workers supporting patient care in a real clinical setting"
                 className="h-56 w-full object-cover"
+                loading="eager"
               />
             </div>
 

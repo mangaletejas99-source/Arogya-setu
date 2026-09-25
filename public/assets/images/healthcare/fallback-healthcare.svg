@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Arogya Setu healthcare fallback</title>
+  <desc id="desc">Professional healthcare illustration used when images fail to load.</desc>
+  <defs>
+    <linearGradient id="panel" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#eff8ff"/>
+      <stop offset="100%" stop-color="#dfeeff"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b3b66"/>
+      <stop offset="100%" stop-color="#1b6fa8"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#f7b267"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#edf7ff"/>
+  <circle cx="180" cy="150" r="130" fill="#dbeafe"/>
+  <circle cx="1020" cy="150" r="90" fill="#fef3c7"/>
+  <rect x="115" y="100" width="970" height="600" rx="32" fill="url(#panel)" stroke="#c9d9f0" stroke-width="4"/>
+  <rect x="270" y="220" width="640" height="250" rx="26" fill="url(#blue)"/>
+  <circle cx="390" cy="310" r="82" fill="#f6fafc"/>
+  <rect x="332" y="262" width="116" height="116" rx="20" fill="#dbeafe"/>
+  <path d="M348 323h84v18h-84zm41-41h18v84h-18z" fill="#0b3b66"/>
+  <rect x="560" y="250" width="200" height="22" rx="11" fill="#9ad3ff" opacity="0.9"/>
+  <rect x="560" y="292" width="260" height="18" rx="9" fill="#9ad3ff" opacity="0.7"/>
+  <rect x="560" y="330" width="220" height="18" rx="9" fill="#9ad3ff" opacity="0.6"/>
+  <circle cx="300" cy="520" r="68" fill="#fff" stroke="#c7d5ea"/>
+  <circle cx="600" cy="520" r="68" fill="#fff" stroke="#c7d5ea"/>
+  <circle cx="900" cy="520" r="68" fill="#fff" stroke="#c7d5ea"/>
+  <path d="M300 468c16-52 68-86 110-86 56 0 92 46 92 92 0 57-48 104-92 104-64 0-110-54-110-110zm32 0c0 41 31 72 72 72 47 0 82-33 82-72 0-38-35-74-82-74-41 0-72 34-72 74zm270 54c0-61 53-106 112-106 60 0 109 43 109 104 0 63-41 103-109 103-57 0-112-39-112-101zm36 0c0 43 31 70 76 70 48 0 77-30 77-71 0-42-29-71-77-71-45 0-76 28-76 72zm252-54c12-19 36-32 60-32 41 0 74 34 74 74v32h-42v-30c0-18-12-30-31-30-18 0-31 12-31 30v34h-42v-48c0-15 2-27 12-38z" fill="#dfeeff"/>
+  <path d="M124 670h952v58H124z" fill="#d7e7ff"/>
+  <text x="600" y="708" text-anchor="middle" font-family="Verdana, Arial, sans-serif" font-size="40" font-weight="700" fill="#103662">AROGYA SETU</text>
+</svg>
