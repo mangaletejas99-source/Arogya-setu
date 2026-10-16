@@ -14,7 +14,7 @@ export const AboutPage: React.FC = () => {
           Institutional Overview
         </span>
         <h1 className="text-2xl sm:text-3xl font-bold text-gov-navy mt-1">
-          About Arogya Setu (आरोग्य सेतू)
+          About Medivora Nexus
         </h1>
         <p className="text-sm text-gov-gray-600 mt-1">
           Integrated Digital Public Health Platform — Demonstration Prototype modeled on Indian Public Healthcare Systems.
@@ -28,7 +28,7 @@ export const AboutPage: React.FC = () => {
           <span>PROTOTYPE / DEMO • Public Health Information Platform</span>
         </div>
         <p>
-          Arogya Setu is an architectural prototype created to demonstrate an end-to-end digital public health platform connecting rural citizens, community health workers (ASHA/ANM), Primary Health Centres, Civil Hospitals, and Government Administrators.
+          Medivora Nexus is an architectural prototype created to demonstrate an end-to-end digital public health platform connecting rural citizens, community health workers (ASHA/ANM), Primary Health Centres, Civil Hospitals, and Government Administrators.
         </p>
         <p>
           <strong>Notice:</strong> This is NOT an official Government of India or Government of Maharashtra website. Its information architecture, accessibility, and visual discipline are inspired by guidelines published by the Ministry of Health & Family Welfare (MoHFW) and the Guidelines for Indian Government Websites (GIGW).
@@ -50,7 +50,7 @@ export const AboutPage: React.FC = () => {
           <span>The Integrated 5-Tier Healthcare Continuum</span>
         </h2>
         <p className="text-xs text-gov-gray-600 leading-relaxed">
-          The core vision of Arogya Setu is bridging geographic disparities across rural and urban India by establishing a continuous digital pipeline from the grassroots village to tertiary care:
+          The core vision of Medivora Nexus is bridging geographic disparities across rural and urban India by establishing a continuous digital pipeline from the grassroots village to tertiary care:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs">

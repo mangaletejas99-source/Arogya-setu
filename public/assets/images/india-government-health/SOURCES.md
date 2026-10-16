@@ -1,6 +1,6 @@
 # Official government public-health image library
 
-This project stores the visual image set used by the Arogya Setu portal in this directory.
+This project stores the visual image set used by the Medivora Nexus portal in this directory.
 
 The files in this folder were sourced from official Ministry of Health & Family Welfare / Ayushman Arogya Mandir public websites and were selected to reflect Indian public-health delivery, frontline health workers, PHCs, health camps, and community outreach.
 

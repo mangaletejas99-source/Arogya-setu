@@ -10,7 +10,7 @@ export const translations: Record<Language, Translations> = {
     contact: "Contact Directory",
     prototypeNotice: "Prototype / Demonstration Platform — Inspired by Indian Public Health Portals (Not an official Government website)",
     govtHeaderSubtitle: "Ministry of Health & Family Welfare Inspired Model",
-    portalTitle: "AROGYA SETU",
+    portalTitle: "MEDIVORA NEXUS",
     portalSubtitle: "Integrated Digital Public Health Platform",
     searchPlaceholder: "Search hospital, doctor, medicine, test or scheme...",
     login: "Login / Sign In",
@@ -92,7 +92,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicy: "Privacy Policy",
     termsOfUse: "Terms & Conditions",
     disclaimer: "Disclaimer: This is a demonstration prototype designed for public health service modeling. It is not an official Government of India portal.",
-    copyrightNotice: "© 2026 Arogya Setu Prototype. Built with Open Public Standards.",
+    copyrightNotice: "© 2026 Medivora Nexus Prototype. Built with Open Public Standards.",
     lastUpdated: "Page Last Updated: September 19, 2026",
   },
   mr: {
@@ -104,7 +104,7 @@ export const translations: Record<Language, Translations> = {
     contact: "संपर्क निर्देशिका",
     prototypeNotice: "प्रोटोटाइप / प्रात्यक्षिक व्यासपीठ — भारतीय सार्वजनिक आरोग्य पोर्टलवर आधारित (अधिकृत सरकारी संकेतस्थळ नाही)",
     govtHeaderSubtitle: "आरोग्य आणि कुटुंब कल्याण मंत्रालय प्रेरित प्रारुप",
-    portalTitle: "आरोग्य सेतू",
+    portalTitle: "Medivora Nexus",
     portalSubtitle: "एकात्मिक डिजिटल सार्वजनिक आरोग्य व्यासपीठ",
     searchPlaceholder: "रुग्णालय, डॉक्टर, औषधे, तपासणी किंवा योजना शोधा...",
     login: "लॉगिन / प्रवेश",
@@ -186,7 +186,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicy: "गोपनीयता धोरण",
     termsOfUse: "नियम व अटी",
     disclaimer: "अस्वीकरण: हे सार्वजनिक आरोग्य सेवा मॉडेलिंगसाठी बनवलेले प्रात्यक्षिक व्यासपीठ आहे. हे भारत सरकारचे अधिकृत पोर्टल नाही.",
-    copyrightNotice: "© २०२६ आरोग्य सेतू प्रात्यक्षिक. मुक्त मानकांवर आधारित.",
+    copyrightNotice: "© २०२६ Medivora Nexus प्रात्यक्षिक. मुक्त मानकांवर आधारित.",
     lastUpdated: "पृष्ठ अद्यतन दिनांक: १९ सप्टेंबर २०२६",
   },
   hi: {
@@ -198,7 +198,7 @@ export const translations: Record<Language, Translations> = {
     contact: "संपर्क निर्देशिका",
     prototypeNotice: "प्रोटोटाइप / प्रदर्शन मंच — भारतीय सार्वजनिक स्वास्थ्य पोर्टलों से प्रेरित (आधिकारिक सरकारी वेबसाइट नहीं)",
     govtHeaderSubtitle: "स्वास्थ्य एवं परिवार कल्याण मंत्रालय प्रेरित मॉडल",
-    portalTitle: "आरोग्य सेतु",
+    portalTitle: "Medivora Nexus",
     portalSubtitle: "एकीकृत डिजिटल सार्वजनिक स्वास्थ्य मंच",
     searchPlaceholder: "अस्पताल, डॉक्टर, दवा, जांच या योजना खोजें...",
     login: "लॉग इन / प्रवेश",
@@ -280,7 +280,7 @@ export const translations: Record<Language, Translations> = {
     privacyPolicy: "गोपनीयता नीति",
     termsOfUse: "नियम एवं शर्तें",
     disclaimer: "अस्वीकरण: यह सार्वजनिक स्वास्थ्य सेवा मॉडलिंग के लिए बनाया गया एक प्रोटोटाइप मंच है। यह भारत सरकार की आधिकारिक वेबसाइट नहीं है।",
-    copyrightNotice: "© २०२६ आरोग्य सेतु प्रोटोटाइप। सार्वजनिक खुले मानकों पर निर्मित।",
+    copyrightNotice: "© २०२६ Medivora Nexus प्रोटोटाइप। सार्वजनिक खुले मानकों पर निर्मित।",
     lastUpdated: "अंतिम अद्यतन: १९ सितंबर २०२६",
   }
 };

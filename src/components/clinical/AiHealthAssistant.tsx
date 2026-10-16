@@ -64,12 +64,12 @@ const emergencyPatterns = [
 
 const buildWelcomeMessage = (language: 'en' | 'hi' | 'mr'): Message => {
   if (language === 'mr') {
-    return { id: `bot-${Date.now()}-${Math.random().toString(16).slice(2)}`, sender: 'bot', text: 'नमस्कार! मी आरोग्य सेतू AI हेल्थ असिस्टंट आहे. आज आपल्याला कोणत्या आरोग्य समस्येची चिंता आहे? ताप, खोकला, छातीत दुखणे किंवा इतर लक्षणे सांगा.', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
+    return { id: `bot-${Date.now()}-${Math.random().toString(16).slice(2)}`, sender: 'bot', text: 'नमस्कार! मी Medivora Nexus AI हेल्थ असिस्टंट आहे. आज आपल्याला कोणत्या आरोग्य समस्येची चिंता आहे? ताप, खोकला, छातीत दुखणे किंवा इतर लक्षणे सांगा.', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
   }
   if (language === 'hi') {
-    return { id: `bot-${Date.now()}-${Math.random().toString(16).slice(2)}`, sender: 'bot', text: 'नमस्ते! मैं आरोग्य सेतु AI हेल्थ असिस्टेंट हूँ। आज आपको कौन सी स्वास्थ्य समस्या है? बुखार, खांसी, सीने में दर्द या अन्य लक्षण बताएं।', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
+    return { id: `bot-${Date.now()}-${Math.random().toString(16).slice(2)}`, sender: 'bot', text: 'नमस्ते! मैं Medivora Nexus AI हेल्थ असिस्टेंट हूँ। आज आपको कौन सी स्वास्थ्य समस्या है? बुखार, खांसी, सीने में दर्द या अन्य लक्षण बताएं।', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
   }
-  return { id: `bot-${Date.now()}-${Math.random().toString(16).slice(2)}`, sender: 'bot', text: 'Hello! I am the Arogya Setu AI Health Assistant. Tell me what symptoms you are experiencing today, including fever, cough, chest discomfort, or other concerns.', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
+  return { id: `bot-${Date.now()}-${Math.random().toString(16).slice(2)}`, sender: 'bot', text: 'Hello! I am the Medivora Nexus AI Health Assistant. Tell me what symptoms you are experiencing today, including fever, cough, chest discomfort, or other concerns.', timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
 };
 
 const createNewSession = (language: 'en' | 'hi' | 'mr'): AssistantSession => ({
@@ -392,7 +392,7 @@ export const AiHealthAssistant: React.FC = () => {
               <Sparkles className="h-4 w-4" />
             </div>
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300">AROGYA SETU AI HEALTH ASSISTANT</div>
+              <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300">MEDIVORA NEXUS AI HEALTH ASSISTANT</div>
               <div className="text-sm font-bold text-white">
                 {language === 'mr' ? 'तुमचा बहुभाषिक आरोग्य सहकारी' : language === 'hi' ? 'आपका बहुभाषी डिजिटल स्वास्थ्य साथी' : 'Your multilingual digital health companion'}
               </div>

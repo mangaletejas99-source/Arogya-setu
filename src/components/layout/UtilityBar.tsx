@@ -38,7 +38,7 @@ export const UtilityBar: React.FC = () => {
           </a>
           
           <button
-            onClick={() => announceToScreenReader("Arogya Setu Demonstration Platform. Screen reader support active.")}
+            onClick={() => announceToScreenReader("Medivora Nexus Demonstration Platform. Screen reader support active.")}
             className="flex items-center gap-1 hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-gov-saffron px-1 py-0.5"
             title={t.screenReader}
           >

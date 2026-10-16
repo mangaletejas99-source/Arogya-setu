@@ -121,5 +121,5 @@ app.post("/api/assistant/summary", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`AROGYA SETU Backend running on http://localhost:${PORT}`);
+  console.log(`MEDIVORA NEXUS Backend running on http://localhost:${PORT}`);
 });

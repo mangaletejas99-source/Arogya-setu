@@ -49,6 +49,7 @@ import { FacilityDashboard } from './pages/facility/FacilityDashboard';
 
 // Government Pages
 import { GovernmentDashboard } from './pages/government/GovernmentDashboard';
+import { SmartDiseaseResponse } from './pages/government/SmartDiseaseResponse';
 
 export const App: React.FC = () => {
   return (
@@ -123,6 +124,7 @@ export const App: React.FC = () => {
 
                   {/* Government Health Administration Routes */}
                   <Route path="/government/dashboard" element={<GovernmentDashboard />} />
+                  <Route path="/government/smart-response" element={<SmartDiseaseResponse />} />
                   <Route path="/government/facilities" element={<FacilitiesPage />} />
                   <Route path="/government/referrals" element={<ReferralStatusView />} />
                   <Route path="/government/medicines" element={<MedicinesView />} />

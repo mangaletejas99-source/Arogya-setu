@@ -86,7 +86,7 @@ export const LoginPage: React.FC = () => {
       <div className="mb-6 text-center space-y-2">
         <div className="inline-flex items-center gap-2 bg-white border border-gov-gray-200 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-gov-navy shadow-sm">
           <Shield className="w-3.5 h-3.5 text-gov-saffron" />
-          AROGYA SETU
+          MEDIVORA NEXUS
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-gov-navy tracking-tight">Integrated Digital Public Health Platform</h1>
         <p className="text-xs text-gov-gray-600">Government-inspired prototype for healthcare access and service coordination.</p>
@@ -99,13 +99,13 @@ export const LoginPage: React.FC = () => {
               <div className="flex items-center gap-3">
                 <img
                   src={healthcareImages.logo}
-                  alt="Arogya Setu logo"
+                  alt="Medivora Nexus logo"
                   className="h-14 w-auto rounded-lg bg-white/5 p-1.5 shadow-sm"
                   loading="eager"
                 />
                 <div>
                   <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-300">Prototype / Demo</div>
-                  <div className="text-3xl font-black tracking-tight mt-1">AROGYA SETU</div>
+                  <div className="text-3xl font-black tracking-tight mt-1">MEDIVORA NEXUS</div>
                 </div>
               </div>
               <div className="rounded-full border border-amber-300/40 bg-white/5 px-3 py-1 text-[10px] font-bold uppercase text-amber-200">

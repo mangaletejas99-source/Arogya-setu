@@ -20,7 +20,7 @@
   <path d="M1001 235L891 345" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
   <path d="M199 235L89 345" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
   <path d="M89 235L199 345" stroke="#D9871A" stroke-width="16" stroke-linecap="round"/>
-  <text x="600" y="75" text-anchor="middle" fill="#0B3B60" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">AROGYA SETU</text>
+  <text x="600" y="75" text-anchor="middle" fill="#0B3B60" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">MEDIVORA NEXUS</text>
   <text x="600" y="720" text-anchor="middle" fill="#29567A" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="600">Healthcare access • Prevention • Community care</text>
   <defs>
     <linearGradient id="paint0_linear_1_2" x1="600" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse">

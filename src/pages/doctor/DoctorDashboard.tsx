@@ -27,9 +27,12 @@ import {
   Filter,
   ShieldCheck,
   Siren,
+  ClipboardList,
 } from 'lucide-react';
 import { StatusBadge } from '../../components/common/StatusBadge';
 import { Modal } from '../../components/common/Modal';
+import { PregnancyHealthRecords } from '../../components/clinical/PregnancyHealthRecords';
+import { getPregnancyMonitoringProfile } from '../../data/pregnancyRecords';
 import {
   BLOOD_GROUP_OPTIONS,
   URGENCY_OPTIONS,
@@ -57,8 +60,9 @@ export const DoctorDashboard: React.FC = () => {
   const { user } = useAuth();
   const [patientSearch, setPatientSearch] = useState('PAT-1001');
   const [activePatient, setActivePatient] = useState<PatientHealthRecord>(MOCK_CITIZEN_RECORD);
-  const [lookupPatient, setLookupPatient] = useState(() => findPatientById('PAT-1001'));
+  const [lookupPatient, setLookupPatient] = useState<ReturnType<typeof findPatientById>>(null);
   const [lookupMessage, setLookupMessage] = useState('');
+  const [showPregnancyRecords, setShowPregnancyRecords] = useState(false);
   const [assistantSummaries, setAssistantSummaries] = useState<AIHealthSummaryEntry[]>([]);
 
   // Clinical workflow form states
@@ -117,9 +121,10 @@ export const DoctorDashboard: React.FC = () => {
   const handlePatientLookup = (e: React.FormEvent) => {
     e.preventDefault();
     const match = findPatientById(patientSearch);
+    setShowPregnancyRecords(false);
     if (!match) {
       setLookupPatient(null);
-      setLookupMessage('Patient not found. Try PAT-1001, PAT-1002, or PAT-1003.');
+      setLookupMessage('No patient record matches that ID. Check the ID and try again. Demo IDs include PAT-1001, PAT-1002, PAT-1003, and PAT-1004.');
       return;
     }
     setLookupPatient(match);
@@ -305,23 +310,36 @@ export const DoctorDashboard: React.FC = () => {
           <div className="text-[10px] font-bold text-slate-500">Demo database: {DEMO_PATIENTS.length} active records</div>
         </div>
 
-        <form onSubmit={handlePatientLookup} className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3">
+        <form onSubmit={handlePatientLookup} className="grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
           <div className="relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
             <input
               type="text"
+              aria-label="Patient ID"
               value={patientSearch}
               onChange={(e) => setPatientSearch(e.target.value)}
               placeholder="Patient ID: PAT-1001"
               className="w-full pl-9 pr-3 py-2.5 border border-gov-gray-300 rounded-lg text-sm text-gov-navy focus:outline-none focus:ring-2 focus:ring-gov-navy/20"
             />
           </div>
-          <button
-            type="submit"
-            className="bg-gov-navy text-white px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-gov-navyLight transition-colors"
-          >
-            Search Record
-          </button>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <button
+              type="submit"
+              className="bg-gov-navy text-white px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-gov-navyLight transition-colors"
+            >
+              Search Record
+            </button>
+            <button
+              type="button"
+              disabled={!lookupPatient}
+              aria-expanded={showPregnancyRecords}
+              onClick={() => setShowPregnancyRecords((shown) => !shown)}
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-gov-navy bg-white px-4 py-2.5 text-xs font-bold text-gov-navy transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:border-slate-300 disabled:text-slate-400 disabled:hover:bg-white"
+            >
+              <ClipboardList className="h-4 w-4" />
+              Pregnancy Health Records
+            </button>
+          </div>
         </form>
 
         {lookupMessage && (
@@ -331,11 +349,26 @@ export const DoctorDashboard: React.FC = () => {
         )}
 
         {lookupPatient && (
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             <div className="bg-slate-50 border border-gov-gray-200 rounded-lg p-3">
               <div className="text-[10px] uppercase text-slate-500 font-bold">Patient</div>
               <div className="text-sm font-bold text-gov-navy mt-1">{lookupPatient.name}</div>
               <div className="text-[11px] text-slate-600 mt-1">ID: {lookupPatient.patientId} • {lookupPatient.age} yrs • {lookupPatient.gender}</div>
+            </div>
+            <div className="bg-slate-50 border border-gov-gray-200 rounded-lg p-3">
+              <div className="text-[10px] uppercase text-slate-500 font-bold">Pregnancy status</div>
+              {(() => {
+                const pregnancyProfile = getPregnancyMonitoringProfile(lookupPatient.patientId);
+                return pregnancyProfile ? (
+                  <>
+                    <div className="mt-1 text-sm font-bold text-gov-navy">{pregnancyProfile.pregnancyStatus} • {pregnancyProfile.gestationalAgeWeeks ?? 'Not recorded'} weeks</div>
+                    <div className="mt-1 text-[11px] text-slate-600">EDD: {pregnancyProfile.expectedDeliveryDate ?? 'Not recorded'}</div>
+                    <div className={`mt-2 inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold ${pregnancyProfile.riskClassification === 'High Risk' ? 'bg-amber-100 text-amber-950' : 'bg-emerald-100 text-emerald-900'}`}>
+                      {pregnancyProfile.riskClassification === 'High Risk' ? 'High-risk pregnancy' : 'Routine-risk pregnancy'}
+                    </div>
+                  </>
+                ) : <div className="mt-1 text-[11px] text-slate-600">No pregnancy status recorded</div>;
+              })()}
             </div>
             <div className="bg-slate-50 border border-gov-gray-200 rounded-lg p-3">
               <div className="text-[10px] uppercase text-slate-500 font-bold">Current Conditions</div>
@@ -349,6 +382,7 @@ export const DoctorDashboard: React.FC = () => {
             </div>
           </div>
         )}
+        {showPregnancyRecords && lookupPatient && <PregnancyHealthRecords key={lookupPatient.patientId} patient={lookupPatient} />}
       </div>
 
       <div className="bg-white border border-gov-gray-300 rounded-lg p-5 shadow-xs text-xs">

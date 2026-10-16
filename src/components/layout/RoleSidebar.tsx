@@ -23,7 +23,6 @@ import {
   TrendingUp,
   Activity,
   MapPin,
-  ClipboardList
 } from 'lucide-react';
 
 interface SidebarLink {
@@ -89,6 +88,7 @@ export const RoleSidebar: React.FC = () => {
     { name: 'Disease Trends (IDSP)', path: '/government/disease', icon: Activity },
     { name: 'Facility Infrastructure', path: '/government/facilities', icon: Building2 },
     { name: 'KPI Performance Matrix', path: '/government/performance', icon: TrendingUp },
+    { name: 'Smart Disease Response & Doctor Deployment', path: '/government/smart-response', icon: Activity },
   ];
 
   let links = citizenLinks;
@@ -129,6 +129,7 @@ export const RoleSidebar: React.FC = () => {
             <NavLink
               key={link.path}
               to={link.path}
+              title={link.name}
               className={({ isActive }) =>
                 `flex items-center justify-between px-3 py-2 rounded transition-colors font-medium ${
                   isActive
@@ -137,9 +138,9 @@ export const RoleSidebar: React.FC = () => {
                 } ${link.alert ? 'text-gov-emergency' : ''}`
               }
             >
-              <div className="flex items-center gap-2.5">
+              <div className={`flex gap-2.5 ${link.path === '/government/smart-response' ? 'items-start' : 'items-center'}`}>
                 <Icon className={`w-4 h-4 shrink-0 ${link.alert ? 'text-gov-emergency' : ''}`} />
-                <span className="truncate">{link.name}</span>
+                <span className={link.path === '/government/smart-response' ? 'whitespace-normal leading-tight' : 'truncate'}>{link.name}</span>
               </div>
               {link.badge && (
                 <span className="bg-gov-saffron text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">

@@ -27,7 +27,7 @@ export const AccessibilityPage: React.FC = () => {
           <span>Compliance with Guidelines for Indian Government Websites (GIGW 3.0) & WCAG 2.1 AA</span>
         </h2>
         <p className="text-slate-700 leading-relaxed">
-          The Arogya Setu platform is designed and constructed in alignment with the World Wide Web Consortium (W3C) Web Content Accessibility Guidelines (WCAG) 2.1 Level AA and the mandatory accessibility provisions under GIGW 3.0.
+          The Medivora Nexus platform is designed and constructed in alignment with the World Wide Web Consortium (W3C) Web Content Accessibility Guidelines (WCAG) 2.1 Level AA and the mandatory accessibility provisions under GIGW 3.0.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">

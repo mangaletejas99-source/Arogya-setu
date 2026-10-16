@@ -346,6 +346,28 @@ export const DEMO_PATIENTS: PatientRecordDemo[] = [
       }
     ],
     schemes: ['Ayushman Bharat PM-JAY', 'Ayushman Vaya Vandana Yojana']
+  },
+  {
+    patientId: 'PAT-1004',
+    name: 'Demo Patient Four',
+    age: 27,
+    gender: 'Female',
+    bloodGroup: 'A+',
+    abhaId: 'DEMO-ABHA-004',
+    address: 'Demo locality, Nashik',
+    incomeCategory: 'Not recorded',
+    emergencyContact: 'Not recorded',
+    emergencyFlag: false,
+    currentConditions: ['Pregnancy follow-up'],
+    activeMedicines: [],
+    followUpDue: '2026-11-14',
+    highRisk: false,
+    medicalHistory: [],
+    hospitalVisits: [],
+    diagnostics: [],
+    prescriptions: [],
+    referrals: [],
+    schemes: [],
   }
 ];
 

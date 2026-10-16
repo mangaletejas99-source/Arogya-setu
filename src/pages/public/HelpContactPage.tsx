@@ -8,7 +8,7 @@ export const HelpContactPage: React.FC = () => {
       a: "Navigate to 'Citizen Services' > 'Book Appointment'. Choose your district, hospital facility, clinical specialty, and doctor. Select a date to receive an instant OPD Token Number and live queue position tracker."
     },
     {
-      q: "What is an ABHA Number and how is it used in Arogya Setu?",
+      q: "What is an ABHA Number and how is it used in Medivora Nexus?",
       a: "An Ayushman Bharat Health Account (ABHA) is a 14-digit unique health identifier. In this platform, it links your longitudinal medical timeline (diagnoses, prescriptions, and lab tests) across Sub-Centres, PHCs, and District Hospitals."
     },
     {
@@ -17,7 +17,7 @@ export const HelpContactPage: React.FC = () => {
     },
     {
       q: "How can health workers operate in villages with zero internet connectivity?",
-      a: "Arogya Setu features an offline-first architecture. Community Health Workers (ASHA/ANM) can input maternal visits, child immunisations, and vitals offline. Once connectivity is restored, the 'Sync Now' feature synchronizes records to the cloud."
+      a: "Medivora Nexus features an offline-first architecture. Community Health Workers (ASHA/ANM) can input maternal visits, child immunisations, and vitals offline. Once connectivity is restored, the 'Sync Now' feature synchronizes records to the cloud."
     }
   ];
 

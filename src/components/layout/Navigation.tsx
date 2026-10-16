@@ -68,7 +68,7 @@ export const Navigation: React.FC = () => {
         {/* Mobile Hamburger Toggle */}
         <div className="lg:hidden flex items-center justify-between w-full py-2">
           <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
-            Arogya Setu Public Navigation
+            Medivora Nexus Public Navigation
           </span>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

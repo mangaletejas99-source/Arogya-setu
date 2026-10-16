@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
           {/* Col 1: About & Hierarchy */}
           <div className="space-y-2 col-span-2 sm:col-span-1">
             <div className="font-bold text-white uppercase tracking-wider text-[11px] border-b border-slate-700 pb-1">
-              About Arogya Setu
+              About Medivora Nexus
             </div>
             <ul className="space-y-1.5 text-slate-400">
               <li><Link to="/about" className="hover:text-white">Vision & Objectives</Link></li>
@@ -159,7 +159,7 @@ export const Footer: React.FC = () => {
                 {t.disclaimer} This platform is designed for research, architecture demonstration, and workflow modeling of an integrated public healthcare ecosystem in India (Sub-Centre → PHC → Rural Hospital → District Hospital). All patient profiles, biometric IDs, and hospital data shown are purely mock/demo illustrations.
               </p>
               <p className="text-amber-200 font-medium">
-                AROGYA SETU is a prototype/demo developed for educational and hackathon purposes. It is not an official Government of India portal and is not connected to government health databases.
+                MEDIVORA NEXUS is a prototype/demo developed for educational and hackathon purposes. It is not an official Government of India portal and is not connected to government health databases.
               </p>
             </div>
           </div>
